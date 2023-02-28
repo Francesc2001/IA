@@ -335,6 +335,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -592,7 +593,7 @@ CanvasRenderer:
 --- !u!1 &1674256312
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1297959176534648, guid: 59ea0a41476a0f9438c9828895e7b06f, type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -613,7 +614,7 @@ GameObject:
 --- !u!212 &1674256313
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 212682316403113084, guid: 59ea0a41476a0f9438c9828895e7b06f, type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674256312}
@@ -665,7 +666,7 @@ SpriteRenderer:
 --- !u!4 &1674256314
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4233399445100842, guid: 59ea0a41476a0f9438c9828895e7b06f, type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674256312}
@@ -689,7 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823459bfcabf59e4bbb7d30c1033e0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fsm: {fileID: 11400000, guid: 7049450477ab2dc4c8b6d7ad5e13a4d4, type: 2}
+  fsm: {fileID: 11400000, guid: 97b260ed5a3075e44ba1c46683cd8c60, type: 2}
   currentState: 
   textMesh: {fileID: 133049154}
 --- !u!114 &1674256316
@@ -699,7 +700,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674256312}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e84d2230696b2ad4faaab4976079504e, type: 3}
   m_Name: 
@@ -756,9 +757,9 @@ MonoBehaviour:
   perseveranceElapsed: 0
   persevering: 0
   avoidanceAcceleration: {x: 0, y: 0, z: 0}
-  cachedVelocity: {x: 0, y: 0, z: 0}
-  cachedSpeed: 0
-  cachedAngularSpeed: 0
+  velocity: {x: 0, y: 0, z: 0}
+  speed: 0
+  angularSpeed: 0
   groupManager: {fileID: 0}
 --- !u!114 &1674256318
 MonoBehaviour:
@@ -774,7 +775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationA: {fileID: 1674566496}
   locationB: {fileID: 2073187632}
-  intervalBetweenTimeouts: 10
+  intervalBetweenTimeOuts: 10
   initialSeekWeight: 0.2
   seekIncrement: 0.2
   locationReachedRadius: 8
@@ -782,6 +783,8 @@ MonoBehaviour:
   seedDetectionRadius: 100
   seedReachedRadius: 5
   nestReachedRadius: 20
+  predatorFarAwayRadius: 10
+  predatorDetectionRadius: 8
 --- !u!1 &1674566496
 GameObject:
   m_ObjectHideFlags: 0

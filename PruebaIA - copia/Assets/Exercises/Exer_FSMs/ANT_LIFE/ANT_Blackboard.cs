@@ -21,7 +21,8 @@ public class ANT_Blackboard : MonoBehaviour
 
 
     //[Header("Peril Fleeing")]
-
+    public float predatorFarAwayRadius = 10f;
+    public float predatorDetectionRadius = 8f;
 
     void Start()
     {

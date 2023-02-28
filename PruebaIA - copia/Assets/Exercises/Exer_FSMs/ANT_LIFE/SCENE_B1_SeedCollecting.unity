@@ -335,6 +335,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -434,6 +435,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 134756, guid: c41ee5a136095634694fb1e84bed9a05, type: 3}
@@ -485,12 +487,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c41ee5a136095634694fb1e84bed9a05, type: 3}
 --- !u!1001 &1050864583
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 134756, guid: c41ee5a136095634694fb1e84bed9a05, type: 3}
@@ -542,6 +546,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c41ee5a136095634694fb1e84bed9a05, type: 3}
 --- !u!1 &1118436326
 GameObject:
@@ -806,7 +811,7 @@ CanvasRenderer:
 --- !u!1 &1674256312
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1297959176534648, guid: 59ea0a41476a0f9438c9828895e7b06f, type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -828,7 +833,7 @@ GameObject:
 --- !u!212 &1674256313
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 212682316403113084, guid: 59ea0a41476a0f9438c9828895e7b06f, type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674256312}
@@ -880,7 +885,7 @@ SpriteRenderer:
 --- !u!4 &1674256314
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4233399445100842, guid: 59ea0a41476a0f9438c9828895e7b06f, type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674256312}
@@ -904,7 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823459bfcabf59e4bbb7d30c1033e0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fsm: {fileID: 11400000, guid: 7049450477ab2dc4c8b6d7ad5e13a4d4, type: 2}
+  fsm: {fileID: 11400000, guid: ed39dd0c371e6df48af8d93af6c12e5f, type: 2}
   currentState: 
   textMesh: {fileID: 133049154}
 --- !u!114 &1674256316
@@ -914,7 +919,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674256312}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e84d2230696b2ad4faaab4976079504e, type: 3}
   m_Name: 
@@ -987,6 +992,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bafce62d3b02ab648a79b1e5906754b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationA: {fileID: 1674566496}
+  locationB: {fileID: 2073187632}
+  intervalBetweenTimeOuts: 10
+  initialSeekWeight: 0.2
+  seekIncrement: 0.2
+  locationReachedRadius: 10
+  nest: {fileID: 1118436326}
+  seedDetectionRadius: 70
+  seedReachedRadius: 5
+  nestReachedRadius: 20
+  predatorFarAwayRadius: 10
+  predatorDetectionRadius: 8
 --- !u!114 &1674256319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,7 +1011,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674256312}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b1c6fa0d5ba45c4eb509c1ad6e53e63, type: 3}
   m_Name: 

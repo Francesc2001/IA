@@ -36,6 +36,7 @@ public class FSM_BasedGhost : FiniteStateMachine
         audioSource = GetComponent<AudioSource>();
         pursue = GetComponent<Pursue>();
         blackboard = GetComponent<GHOST_Blackboard>();
+        steeringContext = GetComponent<SteeringContext>();
 
         base.OnEnter(); // do not remove
     }
@@ -55,62 +56,79 @@ public class FSM_BasedGhost : FiniteStateMachine
     {
         // STAGE 1: create the states with their logic(s)
         //-----------------------------------------------
-         
-        State goCastle = new State("Go Castle",
-            () => { arrive.target = blackboard.castle; arrive.enabled = true; currentSpeed = maxSpeed; }, // write on enter logic inside {}
-            () => { }, // write in state logic inside {}
-            () => { arrive.enabled = false; currentSpeed = normalSpeed; }  // write on exit logic inisde {}  
+
+        State goCastle = new State("GO CASTLE",
+            () => {
+                steeringContext.maxSpeed *= 4;
+                arrive.target = blackboard.castle;
+                arrive.enabled = true;
+            },
+            () => { },
+            () => {
+                steeringContext.maxSpeed /= 4;
+                arrive.enabled = false;
+            }
         );
 
-        State hide = new State("Hide",
-            () => { elapsedTime = 0f; }, // write on enter logic inside {}
-            () => { elapsedTime += Time.deltaTime; }, // write in state logic inside {}
-            () => { }  // write on exit logic inisde {}  
+        State hide = new State("HIDE",
+            () => { elapsedTime = 0f; },
+            () => { elapsedTime += Time.deltaTime; },
+            () => { }
+        );
+
+        State selectTarget = new State("SELECT TARGET",
+            () => { /* DO NOTHING */},
+            () => { target = SensingUtils.FindRandomInstanceWithinRadius(gameObject, blackboard.victimLabel, blackboard.nerdDetectionRadius); },
+            () => { }
+        );
+
+        State approach = new State("APPROACH",
+            () => {
+                pursue.target = target;
+                pursue.enabled = true;
+            },
+            () => { },
+            () => { /* we'll let pursue go active... */}
+        );
+
+        State cryBoo = new State("CRY BOO",
+            () => { elapsedTime = 0; blackboard.CryBoo(true); },
+            () => { elapsedTime += Time.deltaTime; },
+            () => {
+                blackboard.CryBoo(false);
+                pursue.enabled = false;
+            }
         );
 
 
-        State selectTarget = new State("Select Target",
-            () => { }, // write on enter logic inside {}
-            () => { SensingUtils.FindInstanceWithinRadius(gameObject, blackboard.victimLabel, blackboard.nerdDetectionRadius); }, // write in state logic inside {}
-            () => { }  // write on exit logic inisde {}  
+        Transition castleReached = new Transition("CASTLE REACHED",
+             () => { return SensingUtils.DistanceToTarget(gameObject, blackboard.castle) < blackboard.castleReachedRadius; }
         );
 
-
-        /*
-        State varName = new State("StateName",
-            () => { }, // write on enter logic inside {}
-            () => { }, // write in state logic inside {}
-            () => { }  // write on exit logic inisde {}  
+        Transition timeOutOne = new Transition("TIMEOUT_ONE",
+             () => { return elapsedTime >= blackboard.hideTime; }
         );
 
-         */
-
-        /* STAGE 2: create the transitions with their logic(s)
-         * ---------------------------------------------------
-
-        Transition varName = new Transition("TransitionName",
-            () => { }, // write the condition checkeing code in {}
-            () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
+        Transition timeOutTwo = new Transition("TIMEOUT_ONE",
+             () => { return elapsedTime >= blackboard.booDuration; }
         );
 
-        */
+        Transition targetSelected = new Transition("TARGET SELECTED",
+             () => { return target != null; }
+        );
 
+        Transition targetIsClose = new Transition("TARGET IS CLOSE",
+             () => { return SensingUtils.DistanceToTarget(gameObject, target) < blackboard.closeEnoughToScare; }
+        );
 
-        /* STAGE 3: add states and transitions to the FSM 
-         * ----------------------------------------------
-            
-        AddStates(...);
+        AddStates(goCastle, hide, selectTarget, approach, cryBoo);
+        AddTransition(goCastle, castleReached, hide);
+        AddTransition(hide, timeOutOne, selectTarget);
+        AddTransition(selectTarget, targetSelected, approach);
+        AddTransition(approach, targetIsClose, cryBoo);
+        AddTransition(cryBoo, timeOutTwo, goCastle);
 
-        AddTransition(sourceState, transition, destinationState);
-
-         */
-
-
-        /* STAGE 4: set the initial state
-         
-        initialState = ... 
-
-         */
+        initialState = goCastle;
 
     }
 }

@@ -520,9 +520,9 @@ MonoBehaviour:
   perseveranceElapsed: 0
   persevering: 0
   avoidanceAcceleration: {x: 0, y: 0, z: 0}
-  cachedVelocity: {x: 0, y: 0, z: 0}
-  cachedSpeed: 0
-  cachedAngularSpeed: 0
+  velocity: {x: 0, y: 0, z: 0}
+  speed: 0
+  angularSpeed: 0
   groupManager: {fileID: 0}
 --- !u!114 &673092627
 MonoBehaviour:
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823459bfcabf59e4bbb7d30c1033e0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fsm: {fileID: 11400000, guid: c8a4f8f6accc6ea44ba5e247ac685030, type: 2}
+  fsm: {fileID: 11400000, guid: 44d2c28f119ac12469da953513b86af6, type: 2}
   currentState: 
   textMesh: {fileID: 717787871}
 --- !u!114 &673092628
@@ -870,6 +870,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5489914894782065796, guid: 6d015f4fe74e86047b4146ff3b9cc1ed, type: 3}
@@ -921,6 +922,7 @@ PrefabInstance:
       value: CHICK
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d015f4fe74e86047b4146ff3b9cc1ed, type: 3}
 --- !u!1 &1459453988
 GameObject:
@@ -1030,6 +1032,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
