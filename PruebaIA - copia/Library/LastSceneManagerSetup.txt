@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Exercises/Exer_FSMs/ANT_LIFE/SCENE_B1_SeedCollecting.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
