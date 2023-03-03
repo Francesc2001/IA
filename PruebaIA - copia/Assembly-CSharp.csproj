@@ -126,8 +126,10 @@
     <Compile Include="Assets\Examples\BTs\Ex_2_MakingFire\FIREMAKER_Blackboard.cs" />
     <Compile Include="Assets\Examples\FSMs\CheeseBehaviour.cs" />
     <Compile Include="Assets\Exercises\Exer_BTs\Sam_Fancies_Daisy\DAISY_Blackboard.cs" />
+    <Compile Include="Assets\Exercises\Exer_FSMs\HEN_EATS_WORMS\FSM_RestlessHen.cs" />
     <Compile Include="Assets\AICourse\BTs\PredefinedTasks\Actions\ACTION_Succeed.cs" />
     <Compile Include="Assets\AICourse\BTs\Core\LambdaCondition.cs" />
+    <Compile Include="Assets\Exercises\Exer_FSMs\ANT_LIFE\FSM_Collecting_and_PerilFleeing.cs" />
     <Compile Include="Assets\AICourse\Steerings\FlockingPlusAvoidance.cs" />
     <Compile Include="Assets\AICourse\Steerings\Face.cs" />
     <Compile Include="Assets\Exercises\Exer_Pathfinnding\TwoMice\FSM_CapsuleControl.cs" />
@@ -228,8 +230,6 @@
     <Compile Include="Assets\Exercises\Exer_BTs\Ant_life_Two\CONDITION_FeelUnsafe.cs" />
     <Compile Include="Assets\AICourse\Steerings\Utils.cs" />
     <Compile Include="Assets\Exercises\Exer_FSMs\ANT_LIFE\FSM_SeedCollecting.cs" />
-    <Compile Include="Assets\Exercises\Exer_FSMs\HEN_EATS_WORMS\FSM_RestlessHen.cs" />
-    <Compile Include="Assets\Exercises\Exer_FSMs\ANT_LIFE\FSM_Collecting_and_PerilFleeing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
