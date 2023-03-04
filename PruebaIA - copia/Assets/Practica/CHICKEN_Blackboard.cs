@@ -16,8 +16,8 @@ public class CHICKEN_Blackboard : MonoBehaviour
     public float foodHasVanishedRadius = 200f;
     public float placeReachedRadius = 15;
 
-    public float antDetectionRadius = 100;
-    public float antFarEnoughRadius = 250; 
+    public float antDetectionRadius = 100f;
+    public float antFarEnoughRadius = 100f; 
 
     public GameObject henHouse;
     //public GameObject cabbage;

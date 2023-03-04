@@ -2183,7 +2183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   members: []
-  numInstances: 80
+  numInstances: 30
   delay: 0.2
   prefab: {fileID: 1368880381347978208, guid: 2de50dd9e3a59384abd698a2631519a7, type: 3}
   around: 0
@@ -2977,6 +2977,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

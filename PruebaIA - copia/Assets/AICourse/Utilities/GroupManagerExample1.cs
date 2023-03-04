@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class GroupManagerExample1 : Steerings.GroupManager
