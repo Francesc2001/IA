@@ -11,9 +11,9 @@ public class FSM_ANTS : FiniteStateMachine
 
     private WanderAround wanderAround;
     private Flee flee;
-    private GameObject cabbage;
-    private GameObject chicken;
-
+    public GameObject chicken;
+    public ANTS_Blackboard blackboard;
+    public SteeringContext steeringContext;
     public override void OnEnter()
     {
         /* Write here the FSM initialization code. This code is execute every time the FSM is entered.
@@ -21,6 +21,9 @@ public class FSM_ANTS : FiniteStateMachine
          * Usually this code includes .GetComponent<...> invocations */
         wanderAround = GetComponent<WanderAround>();
         flee = GetComponent<Flee>();
+        chicken = GameObject.FindGameObjectWithTag("CHICKEN");
+        blackboard = GetComponent<ANTS_Blackboard>();
+        steeringContext = GetComponent<SteeringContext>();
         base.OnEnter(); // do not remove
     }
 
@@ -40,47 +43,61 @@ public class FSM_ANTS : FiniteStateMachine
         // *-----------------------------------------------
          
         State goingToCabbage = new State("Going To Cabbage",
-            () => { wanderAround.attractor = cabbage; wanderAround.enabled = true; }, // write on enter logic inside {}
+            () => { wanderAround.attractor = blackboard.cabbageLocation; wanderAround.enabled = true; steeringContext.seekWeight = 0.2f; }, // write on enter logic inside {}
             () => { }, // write in state logic inside {}
             () => { wanderAround.enabled = false; }  // write on exit logic inisde {}  
         );
 
-        /*
-        State varName = new State("StateName",
-            () => { }, // write on enter logic inside {}
+        State goingToNest = new State("Going To Nest",
+            () => { wanderAround.attractor = blackboard.nestLocation; wanderAround.enabled = true; steeringContext.seekWeight = 0.8f; }, // write on enter logic inside {}
             () => { }, // write in state logic inside {}
-            () => { }  // write on exit logic inisde {}  
+            () => { wanderAround.enabled = false; }  // write on exit logic inisde {}  
         );
 
-         */
+        State fleeingFromChicken = new State("Fleeing From Chicken",
+            () => { flee.target = chicken; flee.enabled = true; steeringContext.maxAcceleration *= 4; steeringContext.maxSpeed *= 9; }, // write on enter logic inside {}
+            () => { }, // write in state logic inside {}
+            () => { flee.enabled = false; steeringContext.maxAcceleration /= 4; steeringContext.maxSpeed /= 9; }  // write on exit logic inisde {}  
+        );
 
 
-        /* STAGE 2: create the transitions with their logic(s)
-         * ---------------------------------------------------
 
-        Transition varName = new Transition("TransitionName",
-            () => { }, // write the condition checkeing code in {}
+        //* STAGE 2: create the transitions with their logic(s)
+        //* ---------------------------------------------------
+
+        Transition cabbageReached = new Transition("Cabbage Reached",
+            () => { return SensingUtils.DistanceToTarget(gameObject, blackboard.cabbageLocation) <= blackboard.locationDetectionRadius; }, // write the condition checkeing code in {}
             () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
         );
 
-        */
+        Transition nestReached = new Transition("Nest Reached",
+            () => { return SensingUtils.DistanceToTarget(gameObject, blackboard.nestLocation) <= blackboard.locationDetectionRadius; }, // write the condition checkeing code in {}
+            () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
+        );
+
+        Transition chickenCloseEnough = new Transition("Chicken Close Enough",
+            () => { return SensingUtils.DistanceToTarget(gameObject, chicken) <= blackboard.chickenTooClose; }, // write the condition checkeing code in {}
+            () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
+        );
+
+        Transition chickenFarEnough = new Transition("Chicken Far Enough",
+            () => { return SensingUtils.DistanceToTarget(gameObject, chicken) >= blackboard.chickenFarAwayRadius; }, // write the condition checkeing code in {}
+            () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
+        );
 
 
         /* STAGE 3: add states and transitions to the FSM 
          * ----------------------------------------------
-            
-        AddStates(...);
+        */
+        AddStates(goingToCabbage, goingToNest, fleeingFromChicken);
+        
+        AddTransition(goingToCabbage, chickenCloseEnough, fleeingFromChicken);
+        AddTransition(goingToNest, chickenCloseEnough, fleeingFromChicken);
+        AddTransition(fleeingFromChicken, chickenFarEnough, goingToCabbage);
+        AddTransition(goingToCabbage, cabbageReached, goingToNest);
+        AddTransition(goingToNest, nestReached, goingToCabbage);
 
-        AddTransition(sourceState, transition, destinationState);
 
-         */
-
-
-        /* STAGE 4: set the initial state
-         
-        initialState = ... 
-
-         */
-
+        initialState = goingToCabbage;
     }
 }
