@@ -57,7 +57,7 @@ public class FSM_ANTS : FiniteStateMachine
         State fleeingFromChicken = new State("Fleeing From Chicken",
             () => { flee.target = chicken; flee.enabled = true; steeringContext.maxAcceleration *= 4; steeringContext.maxSpeed *= 9; }, // write on enter logic inside {}
             () => { }, // write in state logic inside {}
-            () => { flee.enabled = false; steeringContext.maxAcceleration /= 4; steeringContext.maxSpeed /= 9; }  // write on exit logic inisde {}  
+            () => { /*flee.enabled = false; */steeringContext.maxAcceleration /= 4; steeringContext.maxSpeed /= 9; }  // write on exit logic inisde {}  
         );
 
 

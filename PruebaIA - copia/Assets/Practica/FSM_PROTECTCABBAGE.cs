@@ -60,7 +60,7 @@ public class FSM_PROTECTCABBAGE : FiniteStateMachine
 
         State wanderer = new State("WANDERER",
             () => { wanderAround.attractor = blackboard.attractor; wanderAround.enabled = true; },
-            () => { }, //cuidao con esto
+            () => { }, 
             () => { wanderAround.enabled = false; }
             );
          
@@ -92,6 +92,8 @@ public class FSM_PROTECTCABBAGE : FiniteStateMachine
             () => { return SensingUtils.DistanceToTarget(gameObject, theAnt) > blackboard.antFarEnoughRadius; },
             () => { }
             );
+
+        
 
         /* STAGE 3: add states and transitions to the FSM 
          * ----------------------------------------------

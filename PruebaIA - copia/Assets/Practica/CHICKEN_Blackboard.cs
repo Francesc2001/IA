@@ -5,24 +5,36 @@ using UnityEngine;
 public class CHICKEN_Blackboard : MonoBehaviour
 {
     public float hunger = 0.0f;
+    public float tiredness = 0.0f;
 
     public float maxChasingTime = 15.0f;
     public float maxRestingTime = 3.0f;
+
     public float eatingTime = 0.5f; 
     public float hungerTooHigh = 100;
-    public float hungerLowEnough = 40.0f;
+    public float hungerLowEnough = 60.0f;
     public float hungerIncrement = 0.5f;
+    public float hungerRecovery = 20.0f;
+
     public float foodReachedRadius = 10f;
     public float foodHasVanishedRadius = 200f;
     public float placeReachedRadius = 15;
 
+    public float tirednessIncrement = 0.5f;
+    public float tirednessTooHigh = 100;
+    public float tirednessLowEnough = 60.0f;
+    public float tirednessRecovery = 20.0f;
+
     public float antDetectionRadius = 100f;
-    public float antFarEnoughRadius = 100f; 
+    public float antFarEnoughRadius = 100f;
+
+    public float foodDetectionRadius = 100f;
 
     public GameObject henHouse;
     //public GameObject cabbage;
     public GameObject ant;
     public GameObject attractor;
+
 
     //maybe añade sonidos
 
@@ -36,7 +48,7 @@ public class CHICKEN_Blackboard : MonoBehaviour
     {
         if (henHouse == null)
         {
-            henHouse = GameObject.Find("HENHOUSE");
+            henHouse = GameObject.Find("HOUSE");
             if (henHouse == null)
             {
                 Debug.LogError("no HENHOUSE object found in " + this);
@@ -66,5 +78,7 @@ public class CHICKEN_Blackboard : MonoBehaviour
     void Update()
     {
         hunger += hungerIncrement * Time.deltaTime;
+
+        tiredness += tirednessIncrement * Time.deltaTime;
     }
 }
